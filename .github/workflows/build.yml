@@ -19,6 +19,9 @@ steps:
       
       - name: Install Dependencies
         run: npm install
-        
+
+      - name: Prisma generate
+        run:  npm run db:generate
+
       - name: Run Build
         run: npm run build
