@@ -18,6 +18,7 @@ app.post("/hdfcWebhook", async (req, res) => {
     };
 
     try {
+        //Below we used batch transaction  Use them when you want to run multiple queries in parallel, without needing the result of one query for another query.
         await db.$transaction([
             db.balance.updateMany({
                 where: {

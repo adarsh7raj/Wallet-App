@@ -4,14 +4,15 @@ export const OnRampTransactions = ({
     transactions
 }: {
     transactions: {
-        time: Date,
+        startTime: Date,
         amount: number,
         // TODO: Can the type of `status` be more specific?
         status: string,
         provider: string
     }[]
-}) => {
+}) => {console.log(transactions);
     if (!transactions.length) {
+        console.log("hi");
         return <Card title="Recent Transactions">
             <div className="text-center pb-8 pt-8">
                 No Recent transactions
@@ -26,7 +27,7 @@ export const OnRampTransactions = ({
                         Received INR
                     </div>
                     <div className="text-slate-600 text-xs">
-                        {t.time.toDateString()}
+                        {t.startTime.toDateString()}
                     </div>
                 </div>
                 <div className="flex flex-col justify-center">

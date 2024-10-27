@@ -26,28 +26,16 @@ export const authOptions = {
                     return {
                         id: existingUser.id.toString(),
                         name: existingUser.name,
-                        email: existingUser.number
+                        number: existingUser.number
                     }
                 }
                 return null;
             }
 
-            try {
-                const user = await db.user.create({
-                    data: {
-                        number: credentials.phone,
-                        password: hashedPassword
-                    }
-                });
+           
             
-                return {
-                    id: user.id.toString(),
-                    name: user.name,
-                    email: user.number
-                }
-            } catch(e) {
-                console.error(e);
-            }
+            
+         
 
             return null
           },
@@ -58,9 +46,13 @@ export const authOptions = {
         // TODO: can u fix the type here? Using any is bad
         async session({ token, session }: any) {
             session.user.id = token.sub
-
+console.log(session);
             return session
-        }
+        },
+        async redirect({ url, baseUrl }:{ url: string; baseUrl: string }) {
+            // If it's a successful sign-in, redirect to /dashboard
+            return  `${baseUrl}/dashboard`;
+          },
     }
   }
   
