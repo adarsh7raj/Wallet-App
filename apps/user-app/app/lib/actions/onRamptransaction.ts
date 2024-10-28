@@ -27,7 +27,7 @@ export async function  handleAddMoney ({amount,providerName}:data)  {
             userId: user_id,
             amount: amount,
             provider: providerName,
-            token: "adaddddf",
+            token: Math.random().toString(),
           },
         });
 
