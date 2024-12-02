@@ -3,7 +3,11 @@ import db from "@repo/db/client";
 import express, { Request, Response } from 'express';
 const app = express();
 
-app.use(express.json())
+app.use(express.json());
+const port =process.env.PORT||3003
+app.get('/',function(req,res){
+    res.json({message:"Hello"});
+})
 app.get("/hdfcWebhook", function(req:Request,res:Response){
     console.log("hi from bank webhook")
     res.json({message:"Hello from webhook"})
@@ -81,6 +85,6 @@ app.post("/hdfcWebhook", async function(req:Request, res:Response)  {
 
 })
 
-app.listen(3003,function(){
+app.listen(port ,function(){
     console.log("server is on port 3003")
 });
