@@ -35,9 +35,12 @@ export async function SignupAction({
         name,
         password: hashedPassword,
         number,
+        Balance:{create:{amount:0,locked:0}}
       },
     });
-
+const hdfc_bank=await db.bank_Balance.create({
+  data:{userId:user.id,balance:Math.floor(Math.random()*100+100000),name:user.name||""}
+})
     // Auto sign-in after signup
  
  

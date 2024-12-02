@@ -17,6 +17,7 @@ model User {
   Balance           Balance[]
   sentTransfers     p2pTransfer[]       @relation(name: "FromUserRelation")
   receivedTransfers p2pTransfer[]       @relation(name: "ToUserRelation")
+  bankBalance      Bank_Balance[]
 }
 
 
@@ -37,7 +38,16 @@ model OnRampTransaction {
   userId    Int
   user      User         @relation(fields: [userId], references: [id])
 }
+model Bank_Balance {
+  id     Int  @id @default(autoincrement())
+  userId Int  @unique
+  name String
+  user   User @relation(fields: [userId], references: [id])
+  balance Int
 
+
+
+}
 model Balance {
   id     Int  @id @default(autoincrement())
   userId Int  @unique

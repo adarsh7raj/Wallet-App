@@ -25,12 +25,12 @@ export async function p2pTransfer(to: string, amount: number) {
     }
     // Below we uesd Sequential transaction Use them when the result of one query depends on another
     // (e.g., checking a balance before transferring money) or when you need conditional logic between queries.
-
+    // These transactions are sequential transaction they occur one after the other
 
     await prisma.$transaction(async (tx) => {
         await tx.$queryRaw`SELECT * FROM "Balance" WHERE "userId" = ${Number(from)} FOR UPDATE`;
         const fromBalance = await tx.balance.findUnique({
-            where: { userId: Number(from) },
+            where: { userId: Number(from) }, // 
           });
           if (!fromBalance || fromBalance.amount < amount) {
             throw new Error('Insufficient funds');
