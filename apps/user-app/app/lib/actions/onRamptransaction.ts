@@ -20,7 +20,7 @@ export async function  handleAddMoney ({amount,providerName}:data)  {
       try {
         const user_id=Number(session.user.id);
         // Create ramp transaction
-        await client.onRampTransaction.create({
+        const ramp_transaction=await client.onRampTransaction.create({
           data: {
             startTime: new Date(),
             status: "Processing",
@@ -30,9 +30,9 @@ export async function  handleAddMoney ({amount,providerName}:data)  {
             token: Math.random().toString(),
           },
         });
-
+        const redirectUrl = `http://localhost:3000/bankTransfer?token=${ramp_transaction.token}&userId=${user_id}&amount=${amount}`;
         // Redirect to the selected bank's URL
-        
+        return redirectUrl
       } catch (error) {
         console.error("Error creating transaction:", error);
       }

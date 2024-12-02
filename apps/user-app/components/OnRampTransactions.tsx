@@ -15,6 +15,7 @@ export const OnRampTransactions = ({
         console.log("hi");
         return <Card title="Recent Transactions">
             <div className="text-center pb-8 pt-8">
+
                 No Recent transactions
             </div>
         </Card>
@@ -24,7 +25,9 @@ export const OnRampTransactions = ({
             {transactions.map(t => <div className="flex justify-between">
                 <div>
                     <div className="text-sm">
-                        Received INR
+                    {t.status === "Success"? "Received INR": t.status === "Processing"?"Processing transaction":"Failed"}
+
+         
                     </div>
                     <div className="text-slate-600 text-xs">
                         {t.startTime.toDateString()}

@@ -16,6 +16,8 @@ export default function SignupPage() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    console.log(name);
+    console.log(value);
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -25,8 +27,7 @@ export default function SignupPage() {
        const value=await SignupAction(formData);
  // Calls the server action directly
  if(value?.message){
-  console.log(value.user_detail.email);
-  console.log(value.user_detail.password);
+
   const signInResponse = await signIn("credentials", {
     redirect: false,
     phone:formData.number,
