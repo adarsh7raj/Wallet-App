@@ -30,7 +30,7 @@ export async function  handleAddMoney ({amount,providerName}:data)  {
             token: Math.random().toString(),
           },
         });
-        const redirectUrl = `http://localhost:3000/bankTransfer?token=${ramp_transaction.token}&userId=${user_id}&amount=${amount}`;
+        const redirectUrl = `https://wallet-app-hdfc-bank.vercel.app/bankTransfer?token=${ramp_transaction.token}&userId=${user_id}&amount=${amount}`;
         // Redirect to the selected bank's URL
         return redirectUrl
       } catch (error) {
