@@ -96,7 +96,7 @@ const NetBankingPage = () => {
                     if(response)
                     window.alert(response);
                   if(response==="Money transferred successfully"){
-                    window.location.href="http://localhost:3001/transfer";
+                    window.location.href="https://wallet-app-user-3ma2wr6ra-adarsh7rajs-projects.vercel.app/transfer";
                   }
                    
                   }
