@@ -1,8 +1,14 @@
 {
   "extends": "@repo/typescript-config/react-library.json",
   "compilerOptions": {
-    // Outputs compiled files in the package root, or specify a folder if preferred
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "declaration": true,
+    "declarationMap": true,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "resolveJsonModule": true
   },
-  "include": ["**/*.ts", "**/*.tsx"], // Includes all TypeScript files in the package
-  "exclude": ["node_modules"] // Excludes the node_modules folder
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules", "dist"]
 }
