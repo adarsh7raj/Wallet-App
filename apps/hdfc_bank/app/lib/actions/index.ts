@@ -50,7 +50,7 @@ export async function user_check({
       userId: userId,
       status: false,
     };
-    await sendWebhookWithRetry(payload, "http://localhost:3003/hdfcWebhook");
+    await sendWebhookWithRetry(payload, "https://wallet-app-2wk3.onrender.com/hdfcWebhook");
     return "User not found or phone number mismatch";
   }
 
@@ -62,7 +62,7 @@ export async function user_check({
       userId: userId,
       status: false,
     };
-    await sendWebhookWithRetry(payload, "http://localhost:3003/hdfcWebhook");
+    await sendWebhookWithRetry(payload, "https://wallet-app-2wk3.onrender.com/hdfcWebhook");
     return "Wrong password provided";
   }
 
@@ -88,8 +88,8 @@ export async function user_check({
         status: true,
       };
       if(response){
-        await sendWebhookWithRetry(payload, "http://localhost:3003/hdfcWebhook");
-        return "Money transferred successfully";
+        await sendWebhookWithRetry(payload, "https://wallet-app-2wk3.onrender.com/hdfcWebhook");
+         return "Money transferred successfully";
       }
     
 

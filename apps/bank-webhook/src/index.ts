@@ -2,8 +2,14 @@
 //import db from "@repo/db/client";
 import { PrismaClient } from '@prisma/client'
 import express, { Request, Response } from 'express';
+import cors from "cors"
 const app = express();
-
+app.use(cors({
+    origin: "https://wallet-app-hdfc-bank-adarsh7rajs-projects.vercel.app", // Replace with your frontend's URL
+    methods: "GET,POST,PUT,DELETE",
+    allowedHeaders: "Content-Type,Authorization",
+credentials:true
+}));
 app.use(express.json());
 const port =process.env.PORT||3003
 app.get('/',function(req,res){
