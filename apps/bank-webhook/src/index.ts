@@ -1,5 +1,6 @@
 
-import db from "@repo/db/client";
+//import db from "@repo/db/client";
+import { PrismaClient } from '@prisma/client'
 import express, { Request, Response } from 'express';
 const app = express();
 
@@ -15,6 +16,7 @@ app.get("/hdfcWebhook", function(req:Request,res:Response){
 app.post("/hdfcWebhook", async function(req:Request, res:Response)  {
     //TODO: Add zod validation here?
     //TODO: HDFC bank should ideally send us a secret so we know this is sent by them
+    const db=new PrismaClient();
     const paymentInformation: {
         token: string;
         userId: string;

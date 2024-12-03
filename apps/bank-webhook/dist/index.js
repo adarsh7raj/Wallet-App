@@ -3,7 +3,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const client_1 = __importDefault(require("@repo/db/client"));
+//import db from "@repo/db/client";
+const client_1 = require("@prisma/client");
 const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
@@ -18,6 +19,7 @@ app.get("/hdfcWebhook", function (req, res) {
 app.post("/hdfcWebhook", async function (req, res) {
     //TODO: Add zod validation here?
     //TODO: HDFC bank should ideally send us a secret so we know this is sent by them
+    const db = new client_1.PrismaClient();
     const paymentInformation = {
         token: req.body.token,
         userId: req.body.userId,
@@ -29,8 +31,8 @@ app.post("/hdfcWebhook", async function (req, res) {
         //Below we used batch transaction, these are concurrent transaction they execute parallely  Use them when you want to run multiple queries in parallel, without needing the result of one query for another query.
         if (paymentInformation.status) {
             console.log("inside status true");
-            await client_1.default.$transaction([
-                client_1.default.balance.update({
+            await db.$transaction([
+                db.balance.update({
                     where: {
                         userId: Number(paymentInformation.userId)
                     },
@@ -41,7 +43,7 @@ app.post("/hdfcWebhook", async function (req, res) {
                         }
                     }
                 }),
-                client_1.default.onRampTransaction.update({
+                db.onRampTransaction.update({
                     where: {
                         token: paymentInformation.token
                     },
@@ -56,7 +58,7 @@ app.post("/hdfcWebhook", async function (req, res) {
         }
         else {
             console.log("inside status false");
-            const data = await client_1.default.onRampTransaction.update({
+            const data = await db.onRampTransaction.update({
                 where: {
                     token: paymentInformation.token
                 },
