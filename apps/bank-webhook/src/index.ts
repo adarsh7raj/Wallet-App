@@ -1,5 +1,5 @@
 
-import db from "@repo/db/client";
+import db from "../../../packages/db/dist/index"
 import express, { Request, Response } from 'express';
 const app = express();
 
