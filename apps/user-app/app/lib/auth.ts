@@ -51,8 +51,15 @@ console.log(session);
         },
         async redirect({ url, baseUrl }:{ url: string; baseUrl: string }) {
             // If it's a successful sign-in, redirect to /dashboard
-            return  `${baseUrl}/dashboard`;
+            if(url==="/dashboard"){
+                console.log(url);
+                return  `${baseUrl}/dashboard`;
+            }
+            if(url==="/landing"){
+                console.log(url);
+                return `${baseUrl}/landing`
+            }
+          return `${baseUrl}/dashboard`
           },
     }
   }
-  

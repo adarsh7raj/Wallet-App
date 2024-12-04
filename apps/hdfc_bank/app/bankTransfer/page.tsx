@@ -100,7 +100,7 @@ const NetBankingContent = () => {
                   if (response) window.alert(response);
                   if (response === "Money transferred successfully") {
                     window.location.href =
-                      "https://wallet-app-user-3ma2wr6ra-adarsh7rajs-projects.vercel.app/transfer";
+                      "https://wallet-app-user-app-mocha.vercel.app/transfer";
                   }
                 } catch (e) {
                   console.log(e);

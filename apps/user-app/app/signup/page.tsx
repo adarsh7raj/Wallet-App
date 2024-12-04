@@ -29,7 +29,8 @@ export default function SignupPage() {
  if(value?.message){
 
   const signInResponse = await signIn("credentials", {
-    redirect: false,
+    callbackUrl:"/dashboard",
+    redirect: true,
     phone:formData.number,
     password:formData.password, // Use the plain password to sign in after hashing
   });
@@ -38,9 +39,7 @@ console.log(signInResponse?.ok);
    
     throw new Error("Signup successful, but auto sign-in failed");
   }
-  else{
-    router.push("/dashboard");
-   }
+  
  }
 
  // Redirect after signup

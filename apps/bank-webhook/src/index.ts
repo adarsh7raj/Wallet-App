@@ -5,7 +5,7 @@ import express, { Request, Response } from 'express';
 import cors from "cors"
 const app = express();
 app.use(cors({
-    origin: "https://wallet-app-hdfc-bank-adarsh7rajs-projects.vercel.app", // Replace with your frontend's URL
+    origin: "https://wallet-app-hdfc-bank.vercel.app", 
     methods: "GET,POST,PUT,DELETE",
     allowedHeaders: "Content-Type,Authorization",
 credentials:true
