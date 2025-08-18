@@ -5,7 +5,7 @@ import { Select } from "@repo/ui/select";
 import { useState } from "react";
 import { TextInput } from "@repo/ui/textinput";
 import { handleAddMoney } from "../app/lib/actions/onRamptransaction";
-
+import { useRouter } from "next/router";
 const SUPPORTED_BANKS = [
   {
     name: "HDFC Bank",
@@ -21,7 +21,7 @@ export const AddMoney =  () => {
   const [redirectUrl, setRedirectUrl] = useState(SUPPORTED_BANKS[0]?.redirectUrl);
   const [providerName, setProviderName] = useState("HDFC Bank");
   const [amount, setAmount] = useState<number>(0);
-  
+  const router=useRouter()
   // Getting session asynchronously outside the event handler
 
 
@@ -54,7 +54,10 @@ export const AddMoney =  () => {
           <Button onClick={async function(){
             console.log(providerName);
            const url=await handleAddMoney({amount,providerName});
-           window.location.href = url||"" ;
+           if(url){
+            router.push(url) ;
+           }
+      
           }}>Add Money</Button>
         </div>
       </div>

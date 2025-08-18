@@ -6,7 +6,7 @@ import { user_check } from "../lib/actions";
 
 const NetBankingContent = () => {
   const router = useRouter();
-  const searchParams = useSearchParams(); // Use `useSearchParams` hook
+  const searchParams = useSearchParams(); 
   const token = searchParams.get("token") || "jswjnj";
   const userId = searchParams.get("userId") || "7";
   const amount = searchParams.get("amount") || "100";
@@ -99,12 +99,12 @@ const NetBankingContent = () => {
                   });
                   if (response) window.alert(response);
                   if (response === "Money transferred successfully") {
-                    window.location.href =
-                      "https://wallet-app-user-app-mocha.vercel.app/transfer";
+                    // is this should by bank or by user app?
+                    router.push("https://wallet-app-user-app-mocha.vercel.app/transfer");
                   }
                 } catch (e) {
                   console.log(e);
-                  window.alert("An internal server error occurred");
+                  window.alert("An internal server error occurred try again");
                 }
               }
             }}

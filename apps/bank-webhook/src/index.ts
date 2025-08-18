@@ -20,8 +20,7 @@ app.get("/hdfcWebhook", function(req:Request,res:Response){
     res.json({message:"Hello from webhook"})
 })
 app.post("/hdfcWebhook", async function(req:Request, res:Response)  {
-    //TODO: Add zod validation here?
-    //TODO: HDFC bank should ideally send us a secret so we know this is sent by them
+   
     const db=new PrismaClient();
     const paymentInformation: {
         token: string;

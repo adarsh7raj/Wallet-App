@@ -9,24 +9,50 @@ import { p2pTransfer } from "../app/lib/actions/p2ptransfer";
 export function SendCard() {
     const [number, setNumber] = useState("");
     const [amount, setAmount] = useState("");
+    const [message, setMessage] = useState("");
 
-    return <div className="h-[90vh]">
-        <Center>
-            <Card title="Send">
-                <div className="min-w-72 pt-2">
-                    <TextInput placeholder={"Number"} label="Number" onChange={(value) => {
-                        setNumber(value)
-                    }} />
-                    <TextInput placeholder={"Amount"} label="Amount" onChange={(value) => {
-                        setAmount(value)
-                    }} />
-                    <div className="pt-4 flex justify-center">
-                        <Button onClick={async () => {
-                    const value=await p2pTransfer((number),Number(amount)*100);
-                        }}>Send</Button>
+    return (
+        <div className="h-[90vh]">
+            <Center>
+                <Card title="Send">
+                    <div className="min-w-72 pt-2">
+                        <TextInput
+                            placeholder={"Number"}
+                            label="Number"
+                            onChange={(value) => setNumber(value)}
+                        />
+                        <TextInput
+                            placeholder={"Amount"}
+                            label="Amount"
+                            onChange={(value) => setAmount(value)}
+                        />
+                        <div className="pt-4 flex justify-center">
+                            <Button
+                                onClick={async () => {
+                                    try {
+                                        const result = await p2pTransfer(number, Number(amount) * 100);
+
+                                        if (result?.message) {
+                                            setMessage("❌ " + result.message);
+                                        } else {
+                                            setMessage("✅ Transfer successful!");
+                                        }
+                                    } catch (err: any) {
+                                        setMessage("❌ Transfer failed: " + err.message);
+                                    }
+                                }}
+                            >
+                                Send
+                            </Button>
+                        </div>
+                        {message && (
+                            <p className="text-center pt-3 font-medium">
+                                {message}
+                            </p>
+                        )}
                     </div>
-                </div>
-            </Card>
-        </Center>
-    </div>
+                </Card>
+            </Center>
+        </div>
+    );
 }

@@ -2,7 +2,9 @@
 import client from "@repo/db/client";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth"; 
-
+import dotenv from "dotenv";
+dotenv.config();
+const BANK_URI= process.env.BANK_URI || "https://wallet-app-hdfc-bank.vercel.app/bankTransfer";
 interface data{
     amount:number|undefined,
     providerName:string,
@@ -30,8 +32,9 @@ export async function  handleAddMoney ({amount,providerName}:data)  {
             token: Math.random().toString(),
           },
         });
-        const redirectUrl = `https://wallet-app-hdfc-bank.vercel.app/bankTransfer?token=${ramp_transaction.token}&userId=${user_id}&amount=${amount}`;
+        // const redirectUrl = `https://wallet-app-hdfc-bank.vercel.app/bankTransfer?token=${ramp_transaction.token}&userId=${user_id}&amount=${amount}`;
         // Redirect to the selected bank's URL
+         const redirectUrl = `${BANK_URI}/bankTransfer?token=${ramp_transaction.token}&userId=${user_id}&amount=${amount}`;
         return redirectUrl
       } catch (error) {
         console.error("Error creating transaction:", error);
